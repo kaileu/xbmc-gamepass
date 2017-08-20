@@ -398,6 +398,7 @@ class GamepassGUI(xbmcgui.WindowXML):
     def onClick(self, controlId):  # pylint: disable=invalid-name
         try:
             show_busy_dialog()
+            format = language(30131+int(addon.getSetting('StreamFormat'))) 
             if controlId in [110, 120, 130]:
                 self.games_list.reset()
                 self.weeks_list.reset()
@@ -485,11 +486,11 @@ class GamepassGUI(xbmcgui.WindowXML):
                             game_version = self.select_version(game_versions)
                         if game_version:
                             if game_version == 'condensed':
-                                stream_url = self.select_stream_url(gp.get_stream(condensed_id, 'game', username=username))
+                                stream_url = self.select_stream_url(gp.get_stream(condensed_id, 'game', username=username, format=format))
                             elif game_version == 'coach':
-                                stream_url = self.select_stream_url(gp.get_stream(coach_id, 'game', username=username))
+                                stream_url = self.select_stream_url(gp.get_stream(coach_id, 'game', username=username, format=format))
                             else:
-                                stream_url = self.select_stream_url(gp.get_stream(video_id, 'game', username=username))
+                                stream_url = self.select_stream_url(gp.get_stream(video_id, 'game', username=username, format=format))
                             if stream_url:
                                 self.play_url(stream_url)
                             elif stream_url is False:
@@ -510,7 +511,7 @@ class GamepassGUI(xbmcgui.WindowXML):
                 elif controlId == 230:  # episode is clicked
                     self.init('game/episode')
                     video_id = self.games_list.getSelectedItem().getProperty('id')
-                    episode_stream_url = self.select_stream_url(gp.get_stream(video_id, 'video', username=username))
+                    episode_stream_url = self.select_stream_url(gp.get_stream(video_id, 'video', username=username, format=format))
                     if episode_stream_url:
                         self.play_url(episode_stream_url)
                     elif episode_stream_url is False:
@@ -519,14 +520,14 @@ class GamepassGUI(xbmcgui.WindowXML):
                 elif controlId == 240:  # Live content (though not games)
                     show_name = self.live_list.getSelectedItem().getLabel()
                     if show_name == 'NFL RedZone - Live':
-                        rz_stream_url = self.select_stream_url(gp.get_stream('redzone', username=username))
+                        rz_stream_url = self.select_stream_url(gp.get_stream('redzone', username=username, format=format))
                         if rz_stream_url:
                             self.play_url(rz_stream_url)
                         elif rz_stream_url is False:
                             dialog = xbmcgui.Dialog()
                             dialog.ok(language(30043), language(30045))
                     elif show_name == 'NFL Network - Live':
-                        nfln_live_stream = self.select_stream_url(gp.get_stream('nfl_network', username=username))
+                        nfln_live_stream = self.select_stream_url(gp.get_stream('nfl_network', username=username, format=format))
                         if nfln_live_stream:
                             self.play_url(nfln_live_stream)
                         elif nfln_live_stream is False:

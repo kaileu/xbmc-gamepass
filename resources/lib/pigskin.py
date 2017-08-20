@@ -254,7 +254,7 @@ class pigskin(object):
             self.log('No condensed version was found for this game.')
             return False
 
-    def get_stream(self, video_id, game_type=None, username=None):
+    def get_stream(self, video_id, game_type=None, username=None, format=None):
         """Return the URL for a stream."""
         self.refresh_tokens()
 
@@ -279,7 +279,7 @@ class pigskin(object):
         akamai_xml_data = self.make_request(stream_request_url, 'get')
         akamai_xml_root = ET.fromstring(akamai_xml_data)
         for i in akamai_xml_root.iter('videoSource'):
-            if i.attrib['format'] == 'ChromeCast':
+            if i.attrib['format'] == format:
                 for text in i.itertext():
                     if 'http' in text:
                         m3u8_url = text
