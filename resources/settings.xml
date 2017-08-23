@@ -4,10 +4,13 @@
     <setting id="password" type="text" label="30002" default="" option="hidden" visible="!eq(-1,)" enable="!eq(-1,)"/>
   </category>
   <category label="30030">
-    <setting id="preferred_bitrate" type="select" label="30003" lvalues="30004|30005|30006|30007|30008|30009|30010|30011|30012" default="8"/>
-    <setting id="preferred_game_version" type="select" label="30013" lvalues="30014|30015|30012" default="0"/>
-    <setting id="local_tz" type="enum" label="30020" lvalues="30026|30027|30028" default="0"/>
+    <setting id="use_inputstream_adaptive" type="bool" label="30049" default="false"/>
+    <setting id="preferred_bitrate" type="select" label="30003" lvalues="30004|30005|30006|30007|30008|30009|30010|30011|30012" visible="eq(-1,false)" default="8"/>
+    <setting id="preferred_game_version" type="select" label="30013" lvalues="30014|30015|30032|30012" default="3"/>
+    <setting id="time_notation" type="enum" label="30020" lvalues="30027|30028" default="1"/>
     <setting id="hide_game_length" type="bool" label="30025" default="false"/>
+	<setting id="team_view" type="bool" label="31000" default="false"/>
+	<setting id="preferred_team" type="enum" label="31001" lvalues="31002|31003|31004|31005|31006|31007|31008|31009|31010|31011|31012|31013|31014|31015|31016|31017|31018|31019|31020|31021|31022|31023|31024|31025|31026|31027|31028|31029|31030|31031|31032|31033|31034" default="31034"/>
   </category>
   <category label="30033">
     <setting id="proxy_enabled" type="bool" label="30034" default="false"/>
